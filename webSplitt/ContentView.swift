@@ -51,13 +51,16 @@ struct ContentView: View {
                             }
                             
                             Section{
+                                Text("Total per person")
                                 Text(totalPerPerson, format: .currency(code: "DZD"))
+                                    .font(.system(size: 25))
+                                    .bold()
                             }
             }.navigationTitle("WeSplit")
                 .toolbar{
                     ToolbarItemGroup(placement: .keyboard){
                         Spacer()
-                        Button("Done"){        
+                        Button("Done"){
                             amountIsFocused = false
                         }
                     }
