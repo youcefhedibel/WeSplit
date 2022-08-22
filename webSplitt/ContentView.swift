@@ -16,20 +16,41 @@ struct ContentView: View {
     
     
     var body: some View {
-        Form{
-            Section{
-                TextField("Amount", value: $checkAmount, format: .currency(code: "DZD") )
-            }
-            
-            Section{
-                Text(checkAmount, format: .currency(code: "DZD"))
-            }
+        NavigationView{
+            Form{
+                            Section{
+                                TextField("Amount", value: $checkAmount, format: .currency(code: "DZD"))
+                                    .keyboardType(.decimalPad)
+                                
+                                Picker("Number of people", selection: $numberOfPeople){
+                                    ForEach(0..<10){
+                                        
+                                        Text("\($0) peoples")
+                                    }
+                                }
+                            }
+                            Section{
+                                
+                                Picker("Tip percentage", selection: $tipPercentage){
+                                    ForEach(tipPercentages, id: \.self){
+                                        Text($0, format: .percent)
+                                    }
+                                }.pickerStyle(.segmented)
+                            } header: {
+                                Text("How much tip you want to leave ?")
+                            }
+                            
+                            Section{
+                                Text(checkAmount, format: .currency(code: "DZD"))
+                            }
+            }.navigationTitle("WeSplit")
         }
-    }
-}
+     
+        }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
 }
